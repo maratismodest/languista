@@ -1,0 +1,17 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 400px;
+    margin: 0 auto;
+    align-items: center;
+    height: 100vh;
+}
+
+.Options {
+    margin: 16px;
+}
+
+.Options > li {
+    margin-bottom: 16px;
+}
