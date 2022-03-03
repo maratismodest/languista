@@ -1,8 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import Button from "@mui/material/Button";
 // @ts-ignore
-import {useSpeechSynthesis} from 'react-speech-kit';
-// @ts-ignore
 import _ from 'lodash'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {database} from "../../database/database";
@@ -42,18 +40,13 @@ const Options = ({list, onClick}: OptionsProps) => {
 
 const Game = () => {
     const [info, setInfo] = useState('')
-    const [langs, setLangs] = useState('')
-    const [voicesArr, setVoicesArr] = useState<SpeechSynthesisVoice[]>([])
+    const [lang, setLang] = useState('')
+    const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
     const [newOne, setNewOne] = useState(0)
     const options: IWordDTO[] = useMemo(() => {
         return _.shuffle(database).slice(0, 4)
     }, [newOne])
     const [answer, setAnswer] = useState<number>(0)
-    const {speak, voices} = useSpeechSynthesis();
-
-
-    const voice = voices.find((x: any) => x.name === 'Google UK English Female')
-
 
     const checkAnswer = (e: any) => {
         e.preventDefault()
@@ -85,13 +78,13 @@ const Game = () => {
         synth.onvoiceschanged = function () {
             const lang: SpeechSynthesisVoice[] = synth.getVoices();
             console.log(lang);
-            setVoicesArr(lang)
-            setLangs(JSON.stringify(lang))
+            setVoices(lang)
+            setLang(JSON.stringify(lang))
         };
 
     }, [])
 
-    if (voicesArr.length === 0) {
+    if (voices.length === 0) {
         return <div>
             Wait
         </div>
@@ -99,20 +92,20 @@ const Game = () => {
 
     let message = new SpeechSynthesisUtterance();
     message.lang = 'en-US';
-    message.text = 'I was made for loving you baby'
-    message.voice = voicesArr[7]
+    message.text = options[0].eng
+    message.voice = voices[2]
 
 
     return (
         <div className='game'>
             <div>{info}</div>
-            <div>{voicesArr[7].name}</div>
+            <div>{lang}</div>
             <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
-            <Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>
+            {/*<Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>*/}
             <Button
                 sx={{width: '100%'}}
                 endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
-                onClick={() => speak({text: options[0].eng, voice: voice})} size='large'>Speak</Button>
+                onClick={() => speechSynthesis.speak(message)} size='large'>Speak</Button>
 
             <Options list={options} onClick={selectAnswer}/>
 
