@@ -106,7 +106,7 @@ const Game = () => {
     return (
         <div className='game'>
             <div>{info}</div>
-            <div>{JSON.stringify(voicesArr[7])}</div>
+            <div>{voicesArr[7].name}</div>
             <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
             <Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>
             <Button
