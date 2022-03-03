@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import Button from "@mui/material/Button";
 // @ts-ignore
 import {useSpeechSynthesis} from 'react-speech-kit';
@@ -41,6 +41,8 @@ const Options = ({list, onClick}: OptionsProps) => {
 
 
 const Game = () => {
+    const [info, setInfo] = useState('')
+    const [langs, setLangs] = useState('')
     const [newOne, setNewOne] = useState(0)
     const options: IWordDTO[] = useMemo(() => {
         return _.shuffle(database).slice(0, 4)
@@ -67,19 +69,35 @@ const Game = () => {
         setAnswer(id)
     }, [answer])
 
-    // if (!voice || !speak || !voices) {
-    //     return null
-    // }
-    console.log("voices", voices)
-    console.log("voice", voice)
+    useEffect(() => {
 
+        if (window.speechSynthesis !== undefined) {
+            console.log('Чтение речи поддерживается в данной браузере');
+            setInfo('Чтение речи поддерживается в данной браузере')
+        } else {
+            console.log('Чтение речи не поддерживается в данном браузере');
+            setInfo('Чтение речи не поддерживается в данном браузере')
+        }
+
+
+        const synth = window.speechSynthesis
+        synth.onvoiceschanged = function () {
+            const lang = synth.getVoices();
+            console.log(lang);
+            setLangs(JSON.stringify(lang))
+        };
+
+    }, [])
 
     let message = new SpeechSynthesisUtterance();
     message.lang = 'en-US';
     message.text = 'Hello world!'
 
+
     return (
         <div className='game'>
+            <div>{info}</div>
+            <div>{langs}</div>
             <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
             <Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>
             <Button
