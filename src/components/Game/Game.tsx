@@ -40,7 +40,6 @@ const Options = ({list, onClick}: OptionsProps) => {
 
 const Game = () => {
     const [info, setInfo] = useState('')
-    const [lang, setLang] = useState('')
     const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
     const [newOne, setNewOne] = useState(0)
     const options: IWordDTO[] = useMemo(() => {
@@ -79,7 +78,6 @@ const Game = () => {
             const lang: SpeechSynthesisVoice[] = synth.getVoices();
             console.log(lang);
             setVoices(lang)
-            setLang(JSON.stringify(lang))
         };
 
     }, [])
@@ -99,7 +97,7 @@ const Game = () => {
     return (
         <div className='game'>
             <div>{info}</div>
-            <div>{lang}</div>
+            <div>{voices[2].name}</div>
             <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
             {/*<Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>*/}
             <Button
