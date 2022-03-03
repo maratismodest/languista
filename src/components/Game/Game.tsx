@@ -72,9 +72,12 @@ const Game = () => {
     }
     console.log("voices", voices)
     console.log("voice", voice)
+    let utterance = new SpeechSynthesisUtterance("Hello world!");
+
     return (
         <div className='game'>
             <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
+            <Button onClick={() => speechSynthesis.speak(utterance)}>Hello world!</Button>
             <Button
                 sx={{width: '100%'}}
                 endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
