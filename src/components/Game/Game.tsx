@@ -74,10 +74,9 @@ const Game = () => {
 
 
         let message = new SpeechSynthesisUtterance();
-
+        message.lang = 'en-US';
+        message.text = options[0].eng
         if (voice) {
-            message.lang = voice.lang;
-            message.text = options[0].eng
             message.voice = voice
         }
 
