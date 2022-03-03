@@ -67,9 +67,9 @@ const Game = () => {
         setAnswer(id)
     }, [answer])
 
-    if (!voice || !speak || !voices) {
-        return null
-    }
+    // if (!voice || !speak || !voices) {
+    //     return null
+    // }
     console.log("voices", voices)
     console.log("voice", voice)
     let utterance = new SpeechSynthesisUtterance("Hello world!");
