@@ -50,8 +50,7 @@ const Game = () => {
 
 
     const voice = voices.find((x: any) => x.name === 'Google UK English Female')
-    console.log("voices", voices)
-    console.log("voice", voice)
+
 
     const checkAnswer = (e: any) => {
         e.preventDefault()
@@ -68,6 +67,11 @@ const Game = () => {
         setAnswer(id)
     }, [answer])
 
+    if (!voice || !speak || !voices) {
+        return null
+    }
+    console.log("voices", voices)
+    console.log("voice", voice)
     return (
         <div className='game'>
             <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
