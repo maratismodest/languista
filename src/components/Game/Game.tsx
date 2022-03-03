@@ -43,6 +43,7 @@ const Options = ({list, onClick}: OptionsProps) => {
 const Game = () => {
     const [info, setInfo] = useState('')
     const [langs, setLangs] = useState('')
+    const [voicesArr, setVoicesArr] = useState<SpeechSynthesisVoice[]>([])
     const [newOne, setNewOne] = useState(0)
     const options: IWordDTO[] = useMemo(() => {
         return _.shuffle(database).slice(0, 4)
@@ -82,16 +83,24 @@ const Game = () => {
 
         const synth = window.speechSynthesis
         synth.onvoiceschanged = function () {
-            const lang = synth.getVoices();
+            const lang: SpeechSynthesisVoice[] = synth.getVoices();
             console.log(lang);
+            setVoicesArr(lang)
             setLangs(JSON.stringify(lang))
         };
 
     }, [])
 
+    if (voicesArr.length === 0) {
+        return <div>
+            Wait
+        </div>
+    }
+
     let message = new SpeechSynthesisUtterance();
     message.lang = 'en-US';
-    message.text = 'Hello world!'
+    message.text = 'I was made for loving you baby'
+    message.voice = voicesArr[7]
 
 
     return (
