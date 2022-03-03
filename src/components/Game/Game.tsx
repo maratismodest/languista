@@ -39,83 +39,72 @@ const Options = ({list, onClick}: OptionsProps) => {
 
 
 const Game = () => {
-    const [info, setInfo] = useState('')
-    const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
-    const [voice, setVoice] = useState<SpeechSynthesisVoice | undefined>(undefined)
-    const [newOne, setNewOne] = useState(0)
-    const options: IWordDTO[] = useMemo(() => {
-        return _.shuffle(database).slice(0, 4)
-    }, [newOne])
-    const [answer, setAnswer] = useState<number>(0)
+        const [info, setInfo] = useState('')
+        const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
+        const [voice, setVoice] = useState<SpeechSynthesisVoice | undefined>(undefined)
+        const [newOne, setNewOne] = useState(0)
+        const options: IWordDTO[] = useMemo(() => {
+            return _.shuffle(database).slice(0, 4)
+        }, [newOne])
+        const [answer, setAnswer] = useState<number>(0)
 
-    const checkAnswer = (e: any) => {
-        e.preventDefault()
-        if (answer === options[0].id) {
-            alert('Верно!')
-        } else {
-            alert(`Неверно! Верно: ${options[0].rus}`)
-        }
-        setNewOne(prevState => prevState + 1)
-        setAnswer(0)
-    }
-
-    const selectAnswer = useCallback((id: number) => {
-        setAnswer(id)
-    }, [answer])
-
-    useEffect(() => {
-
-        if (window.speechSynthesis !== undefined) {
-            console.log('Чтение речи поддерживается в данной браузере');
-            setInfo('Чтение речи поддерживается в данной браузере')
-        } else {
-            console.log('Чтение речи не поддерживается в данном браузере');
-            setInfo('Чтение речи не поддерживается в данном браузере')
-        }
-
-
-        const synth = window.speechSynthesis
-        synth.onvoiceschanged = function () {
-            const lang: SpeechSynthesisVoice[] = synth.getVoices();
-            console.log(lang);
-            setVoices(lang)
-            if (lang.length > 0) {
-                setVoice(lang.find(x => x.lang === 'en-US'))
+        const checkAnswer = (e: any) => {
+            e.preventDefault()
+            if (answer === options[0].id) {
+                alert('Верно!')
+            } else {
+                alert(`Неверно! Верно: ${options[0].rus}`)
             }
+            setNewOne(prevState => prevState + 1)
+            setAnswer(0)
+        }
 
-        };
+        const selectAnswer = useCallback((id: number) => {
+            setAnswer(id)
+        }, [answer])
 
-    }, [])
+        useEffect(() => {
+
+                const voices = window.speechSynthesis.getVoices()
+                console.log(voices)
+                if (voices.length > 0) {
+                    const res = voices.find(x => x.lang === 'en-GB' || x.lang === 'en-US')
+                    setVoice(res)
+                }
+
+            }, []
+        )
 
 
-    let message = new SpeechSynthesisUtterance();
-    message.lang = 'en-US';
-    message.text = options[0].eng
-    if (voice) {
-        message.voice = voice
+        let message = new SpeechSynthesisUtterance();
+        message.lang = 'en-US';
+        message.text = options[0].eng
+        if (voice) {
+            message.voice = voice
+        }
+
+
+        return (
+            <div className='game'>
+                <div>{info}</div>
+                <div>{voices.length}</div>
+                <div>{voice?.name}</div>
+                <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
+                {/*<Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>*/}
+                <Button
+                    sx={{width: '100%'}}
+                    endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
+                    onClick={() => speechSynthesis.speak(message)} size='large'>Speak</Button>
+
+                <Options list={options} onClick={selectAnswer}/>
+
+                <Button sx={{width: '100%'}} onClick={checkAnswer} variant='contained' color='warning'
+                        disabled={answer === 0} size='large'>
+                    Проверить
+                </Button>
+            </div>
+        );
     }
-
-
-    return (
-        <div className='game'>
-            <div>{info}</div>
-            <div>{voices.length}</div>
-            <div>{voice?.name}</div>
-            <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
-            {/*<Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>*/}
-            <Button
-                sx={{width: '100%'}}
-                endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
-                onClick={() => speechSynthesis.speak(message)} size='large'>Speak</Button>
-
-            <Options list={options} onClick={selectAnswer}/>
-
-            <Button sx={{width: '100%'}} onClick={checkAnswer} variant='contained' color='warning'
-                    disabled={answer === 0} size='large'>
-                Проверить
-            </Button>
-        </div>
-    );
-};
+;
 
 export default Game;
