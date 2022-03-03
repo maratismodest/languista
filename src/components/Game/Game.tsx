@@ -65,7 +65,7 @@ const Game = () => {
         useEffect(() => {
             const voicesArr = window.speechSynthesis.getVoices()
             if (voicesArr.length > 0) {
-                const res = voicesArr.find(x => x.lang === 'en-US')
+                const res = voicesArr.find(x => x.lang === 'en-US' || x.lang === 'en-GB')
                 setVoices(voicesArr)
                 setVoice(res)
             }
@@ -74,9 +74,10 @@ const Game = () => {
 
 
         let message = new SpeechSynthesisUtterance();
-        message.lang = 'en-US';
-        message.text = options[0].eng
+
         if (voice) {
+            message.lang = voice.lang;
+            message.text = options[0].eng
             message.voice = voice
         }
 
