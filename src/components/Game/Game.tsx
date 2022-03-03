@@ -80,7 +80,7 @@ const Game = () => {
             console.log(lang);
             setVoices(lang)
             if (lang.length > 0) {
-                setVoice(lang[7])
+                setVoice(lang.find(x => x.lang === 'en-US'))
             }
 
         };
