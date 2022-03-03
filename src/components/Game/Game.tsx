@@ -64,7 +64,7 @@ const Game = () => {
     const selectAnswer = useCallback((id: number) => {
         setAnswer(id)
     }, [answer])
-    
+
     return (
         <div className='game'>
             <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
