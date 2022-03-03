@@ -47,8 +47,6 @@ const Game = () => {
     }, [newOne])
     const [answer, setAnswer] = useState<number>(0)
     const {speak, voices} = useSpeechSynthesis();
-    const voice = voices[4];
-
 
     const checkAnswer = (e: any) => {
         e.preventDefault()
@@ -71,7 +69,7 @@ const Game = () => {
             <Button
                 sx={{width: '100%'}}
                 endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
-                onClick={() => speak({text: options[0].eng, voice: voice})} size='large'>Speak</Button>
+                onClick={() => speak({text: options[0].eng, voice: voices[4]})} size='large'>Speak</Button>
 
             <Options list={options} onClick={selectAnswer}/>
 
