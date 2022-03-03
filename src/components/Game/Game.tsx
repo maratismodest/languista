@@ -39,7 +39,6 @@ const Options = ({list, onClick}: OptionsProps) => {
 
 
 const Game = () => {
-        const [info, setInfo] = useState('')
         const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
         const [voice, setVoice] = useState<SpeechSynthesisVoice | undefined>(undefined)
         const [newOne, setNewOne] = useState(0)
@@ -64,16 +63,14 @@ const Game = () => {
         }, [answer])
 
         useEffect(() => {
+            const voicesArr = window.speechSynthesis.getVoices()
+            if (voicesArr.length > 0) {
+                const res = voicesArr.find(x => x.lang === 'en-US')
+                setVoices(voicesArr)
+                setVoice(res)
+            }
 
-                const voices = window.speechSynthesis.getVoices()
-                console.log(voices)
-                if (voices.length > 0) {
-                    const res = voices.find(x => x.lang === 'en-GB' || x.lang === 'en-US')
-                    setVoice(res)
-                }
-
-            }, []
-        )
+        }, [window.speechSynthesis])
 
 
         let message = new SpeechSynthesisUtterance();
@@ -83,18 +80,17 @@ const Game = () => {
             message.voice = voice
         }
 
-
         return (
             <div className='game'>
-                <div>{info}</div>
-                <div>{voices.length}</div>
                 <div>{voice?.name}</div>
                 <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
                 {/*<Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>*/}
                 <Button
                     sx={{width: '100%'}}
                     endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
-                    onClick={() => speechSynthesis.speak(message)} size='large'>Speak</Button>
+                    onClick={() => {
+                        speechSynthesis.speak(message)
+                    }} size='large'>Speak</Button>
 
                 <Options list={options} onClick={selectAnswer}/>
 
