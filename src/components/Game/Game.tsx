@@ -3,8 +3,8 @@ import Button from "@mui/material/Button";
 // @ts-ignore
 import _ from 'lodash'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import {database} from "../../database/database";
-import {IWordDTO} from "../../models/WordDTO";
+import {database} from "database/database";
+import {IWordDTO} from "models/WordDTO";
 import Typography from "@mui/material/Typography";
 
 
@@ -49,11 +49,27 @@ const Game = () => {
 
         const checkAnswer = (e: any) => {
             e.preventDefault()
-            if (answer === options[0].id) {
+            const isCorrect = answer === options[0].id
+            const storage = localStorage.getItem('game')
+            if (storage) {
+                const res = JSON.parse(storage)
+                const {correct, wrong} = res
+                if (isCorrect) {
+                    res.correct = correct + 1
+                } else {
+                    res.wrong = wrong + 1
+                }
+
+                localStorage.setItem('game', JSON.stringify(res))
+            }
+
+            if (isCorrect) {
                 alert('Верно!')
             } else {
                 alert(`Неверно! Верно: ${options[0].rus}`)
             }
+
+
             setNewOne(prevState => prevState + 1)
             setAnswer(0)
         }

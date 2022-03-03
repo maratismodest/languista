@@ -1,16 +1,9 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import {Link} from "react-router-dom";
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -38,14 +31,23 @@ const AppHeader = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Typography
+                    <Link to="/"> <Typography
                         variant="h6"
                         noWrap
                         component="div"
                         sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
                     >
                         Languista
-                    </Typography>
+                    </Typography></Link>
+                    <Link to="/profile"> <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
+                    >
+                        Profile
+                    </Typography></Link>
+
 
                     {/*<Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>*/}
                     {/*    <IconButton*/}
@@ -83,6 +85,7 @@ const AppHeader = () => {
                     {/*        ))}*/}
                     {/*    </Menu>*/}
                     {/*</Box>*/}
+                    <Link to="/">
                     <Typography
                         variant="h6"
                         noWrap
@@ -91,6 +94,17 @@ const AppHeader = () => {
                     >
                         LOGO
                     </Typography>
+                    </Link>
+                    <Link to="/profile">
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}
+                        >
+                            Profile
+                        </Typography>
+                    </Link>
                     {/*<Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>*/}
                     {/*    {pages.map((page) => (*/}
                     {/*        <Button*/}
