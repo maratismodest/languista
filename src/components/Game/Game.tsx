@@ -82,6 +82,11 @@ const Game = () => {
 
     }, [])
 
+    if (!voices.length) {
+        return (
+            <div>wait</div>
+        )
+    }
 
     let message = new SpeechSynthesisUtterance();
     message.lang = 'en-US';
