@@ -48,6 +48,8 @@ const Game = () => {
     const [answer, setAnswer] = useState<number>(0)
     const {speak, voices} = useSpeechSynthesis();
 
+    const voice = voices.find((x: any) => x.name === 'Google UK English Female')
+
     const checkAnswer = (e: any) => {
         e.preventDefault()
         if (answer === options[0].id) {
@@ -62,14 +64,14 @@ const Game = () => {
     const selectAnswer = useCallback((id: number) => {
         setAnswer(id)
     }, [answer])
-
+    
     return (
         <div className='game'>
             <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
             <Button
                 sx={{width: '100%'}}
                 endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
-                onClick={() => speak({text: options[0].eng, voice: voices[4]})} size='large'>Speak</Button>
+                onClick={() => speak({text: options[0].eng, voice: voice})} size='large'>Speak</Button>
 
             <Options list={options} onClick={selectAnswer}/>
 
