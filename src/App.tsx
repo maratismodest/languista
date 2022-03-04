@@ -1,11 +1,16 @@
 import React, {useEffect} from 'react';
 import {Route, Routes} from "react-router-dom";
-import AppHeader from "components/AppHeader/AppHeader";
-import './App.css'
-import Game from "./components/Game/Game";
-import {game} from "./database/database";
-import Profile from "./components/Profile/Profile";
+import {YMInitializer} from 'react-yandex-metrika';
 
+import AppHeader from "components/AppHeader/AppHeader";
+import Game from "components/Game/Game";
+import Profile from "components/Profile/Profile";
+
+import {game} from "./database/database";
+
+import './App.css'
+
+// react-yandex-metrika
 
 function App() {
     useEffect(() => {
@@ -21,10 +26,11 @@ function App() {
             <main>
                 <Routes>
                     <Route path="/" element={<Game/>}/>
-                    <Route path="profile" element={<Profile />}/>
+                    <Route path="profile" element={<Profile/>}/>
                 </Routes>
 
             </main>
+            <YMInitializer accounts={[87710163]} options={{webvisor: true}}/>
         </div>
     );
 }
