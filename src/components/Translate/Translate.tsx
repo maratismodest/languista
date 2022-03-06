@@ -46,7 +46,7 @@ const Translate = ({words}: any) => {
         const [newOne, setNewOne] = useState(0)
         const options: IWordDTO[] = useMemo(() => {
             return _.shuffle(words).slice(0, 4)
-        }, [])
+        }, [newOne])
         const [answer, setAnswer] = useState<number>(0)
 
         const checkAnswer = (e: any) => {
