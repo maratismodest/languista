@@ -9,24 +9,44 @@ import Profile from "components/Profile/Profile";
 import {game} from "./database/database";
 
 import './App.css'
+import {ROUTES} from "routes";
+import Add from "./components/Add/Add";
+import Translate from "./components/Translate/Translate";
+import {IWordDTO} from "./models/WordDTO";
 
-// react-yandex-metrika
+const res: () => IWordDTO[] = () => {
+    const temp = localStorage.getItem('base')
+    const res =  temp ? JSON.parse(temp) : []
+    console.log(res);
+    return res
+}
+
 
 function App() {
+
     useEffect(() => {
         const storage = localStorage.getItem('game')
         if (!storage) {
             localStorage.setItem('game', JSON.stringify(game))
         }
+        const base = localStorage.getItem('base')
+        if (!base) {
+            localStorage.setItem('base', JSON.stringify([]))
+        }
     }, [])
+
+
     return (
         <div className='App'>
             <AppHeader/>
 
             <main>
                 <Routes>
-                    <Route path="/" element={<Game/>}/>
-                    <Route path="profile" element={<Profile/>}/>
+                    <Route path={ROUTES.main} element={<Game/>}/>
+                    <Route path={ROUTES.profile} element={<Profile/>}/>
+                    <Route path={ROUTES.translate}
+                           element={res().length > 4 ? <Translate words={res()}/> : <div>Мало слов или попробуйте перезапустить страницу!</div>}/>
+                    <Route path={ROUTES.add} element={<Add/>}/>
                 </Routes>
 
             </main>
