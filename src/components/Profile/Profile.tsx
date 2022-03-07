@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {game} from "database/database";
+import MyBase from "../MyBase/MyBase";
+import Typography from "@mui/material/Typography";
 
 const Profile = () => {
     const [profile, setProfile] = useState(game)
@@ -15,14 +17,14 @@ const Profile = () => {
 
     return (
         <div>
-            <h2>Profile</h2>
-            <p>Статистика</p>
-            <div>
+            <Typography align='center' variant="h2" gutterBottom>PROFILE</Typography>
+            <Typography>
                 Количество правильных ответов: {correct}
-            </div>
-            <div>
+            </Typography>
+            <Typography>
                 Количество неправильных ответов: {wrong}
-            </div>
+            </Typography>
+            <MyBase />
         </div>
     );
 };

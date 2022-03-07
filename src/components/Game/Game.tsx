@@ -103,9 +103,7 @@ const Game = () => {
         return (
             <>
                 <div className='game'>
-                    {/*<div>{voice?.name}</div>*/}
                     <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
-                    {/*<Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>*/}
                     <Button
                         sx={{width: '100%'}}
                         endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'

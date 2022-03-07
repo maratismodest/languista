@@ -1,0 +1,17 @@
+.MyBase {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid teal;
+  justify-content: space-between;
+}
+
+.MyBaseList {
+  margin-top: 16px;
+}
+
+
+.MyBaseListWrap {
+  padding: 4px;
+  border: 1px solid teal;
+  border-radius: 4px;
+}

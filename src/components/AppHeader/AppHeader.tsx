@@ -48,22 +48,22 @@ const AppHeader = () => {
                     >
                         Profile
                     </Typography></Link>
-                    <Link to={ROUTES.add}> <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
-                    >
-                        Add
-                    </Typography></Link>
-                    <Link to={ROUTES.translate}> <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
-                    >
-                        Translate
-                    </Typography></Link>
+                    {/*<Link to={ROUTES.add}> <Typography*/}
+                    {/*    variant="h6"*/}
+                    {/*    noWrap*/}
+                    {/*    component="div"*/}
+                    {/*    sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}*/}
+                    {/*>*/}
+                    {/*    Add*/}
+                    {/*</Typography></Link>*/}
+                    {/*<Link to={ROUTES.translate}> <Typography*/}
+                    {/*    variant="h6"*/}
+                    {/*    noWrap*/}
+                    {/*    component="div"*/}
+                    {/*    sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}*/}
+                    {/*>*/}
+                    {/*    Translate*/}
+                    {/*</Typography></Link>*/}
 
                     <Link to={ROUTES.main}>
                         <Typography
@@ -85,26 +85,26 @@ const AppHeader = () => {
                             Profile
                         </Typography>
                     </Link>
-                    <Link to={ROUTES.add}>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{mr: 2,flexGrow: 1, display: {xs: 'flex', md: 'none'}}}
-                        >
-                            Add
-                        </Typography>
-                    </Link>
-                    <Link to={ROUTES.translate}>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{mr: 2,flexGrow: 1, display: {xs: 'flex', md: 'none'}}}
-                        >
-                            Translate
-                        </Typography>
-                    </Link>
+                    {/*<Link to={ROUTES.add}>*/}
+                    {/*    <Typography*/}
+                    {/*        variant="h6"*/}
+                    {/*        noWrap*/}
+                    {/*        component="div"*/}
+                    {/*        sx={{mr: 2,flexGrow: 1, display: {xs: 'flex', md: 'none'}}}*/}
+                    {/*    >*/}
+                    {/*        Add*/}
+                    {/*    </Typography>*/}
+                    {/*</Link>*/}
+                    {/*<Link to={ROUTES.translate}>*/}
+                    {/*    <Typography*/}
+                    {/*        variant="h6"*/}
+                    {/*        noWrap*/}
+                    {/*        component="div"*/}
+                    {/*        sx={{mr: 2,flexGrow: 1, display: {xs: 'flex', md: 'none'}}}*/}
+                    {/*    >*/}
+                    {/*        Translate*/}
+                    {/*    </Typography>*/}
+                    {/*</Link>*/}
                 </Toolbar>
             </Container>
         </AppBar>
