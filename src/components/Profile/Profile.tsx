@@ -18,13 +18,22 @@ const Profile = () => {
     return (
         <div>
             <Typography align='center' variant="h2" gutterBottom>PROFILE</Typography>
-            <Typography>
+            <Typography variant="h5">
                 Количество правильных ответов: {correct}
             </Typography>
-            <Typography>
+            <br/>
+            <Typography variant="h5">
                 Количество неправильных ответов: {wrong}
             </Typography>
-            <MyBase />
+            <br/>
+            <Typography variant="h6">
+                Спасибо, что пользуетесь нашим приложением! Надеемся, что вы получаете от него пользу. Будем рады
+                услышать ваши отзывы и пожелания в телеграмм-чате:
+            </Typography>
+            <Typography variant="h5">
+                <a href='https://t.me/languista' style={{color: 'blue'}}>https://t.me/languista</a>
+            </Typography>
+            <MyBase/>
         </div>
     );
 };
