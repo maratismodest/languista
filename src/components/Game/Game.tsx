@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import Button from "@mui/material/Button";
 // @ts-ignore
 import _ from 'lodash'
@@ -7,15 +7,17 @@ import {database} from "database/database";
 import {IWordDTO} from "models/WordDTO";
 import Typography from "@mui/material/Typography";
 import MyModal from "../MyModal/MyModal";
+import AppContext from "../../context/AppContext";
 
 
 interface OptionsProps {
     list: IWordDTO[],
-    onClick: (id: number) => void
+    onClick: (id: number) => void,
+    state: boolean
 }
 
 
-const Options = ({list, onClick}: OptionsProps) => {
+const Options = ({list, onClick, state}: OptionsProps) => {
     const shuffled: IWordDTO[] = useMemo(() => _.shuffle(list)
         , [list])
     const res = shuffled.map((option, index) => {
@@ -25,7 +27,7 @@ const Options = ({list, onClick}: OptionsProps) => {
                         onClick={() => onClick(option.id)}
                         size='large'
                 >
-                    {option.rus}
+                    {state ? option.rus : option.eng}
                 </Button>
             </li>
         )
@@ -41,6 +43,7 @@ const Options = ({list, onClick}: OptionsProps) => {
 
 const Game = () => {
         const [open, setOpen] = useState(false);
+        const {state} = useContext(AppContext)
         const handleOpen = () => setOpen(true);
         const handleClose = () => setOpen(false);
         const [modal, setModal] = useState('')
@@ -84,18 +87,19 @@ const Game = () => {
 
         useEffect(() => {
             const voicesArr = window.speechSynthesis.getVoices()
+            console.log(voicesArr)
             if (voicesArr.length > 0) {
-                const res = voicesArr.find(x => x.lang === 'en-US' || x.lang === 'en-GB')
+                const res = state ? voicesArr.find(x => x.lang === 'en-US' || x.lang === 'en-GB') : voicesArr.find(x => x.lang === 'ru-RU')
                 setVoices(voicesArr)
                 setVoice(res)
             }
 
-        }, [window.speechSynthesis])
+        }, [window.speechSynthesis, voice, state])
 
 
         let message = new SpeechSynthesisUtterance();
-        message.lang = 'en-US';
-        message.text = options[0].eng
+        message.lang = state ? 'en-US' : 'ru-RU';
+        message.text = state ? options[0].eng : options[0].rus;
         if (voice) {
             message.voice = voice
         }
@@ -103,7 +107,8 @@ const Game = () => {
         return (
             <>
                 <div className='game'>
-                    <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
+                    <Typography align='center' variant="h2"
+                                gutterBottom>{state ? options[0].eng : options[0].rus}</Typography>
                     <Button
                         sx={{width: '100%'}}
                         endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
@@ -111,7 +116,7 @@ const Game = () => {
                             speechSynthesis.speak(message)
                         }} size='large'>Speak</Button>
 
-                    <Options list={options} onClick={selectAnswer}/>
+                    <Options list={options} onClick={selectAnswer} state={state}/>
 
                     <Button sx={{width: '100%'}} onClick={checkAnswer} variant='contained' color='warning'
                             disabled={answer === 0} size='large'>
