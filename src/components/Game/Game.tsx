@@ -6,6 +6,7 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {database} from "database/database";
 import {IWordDTO} from "models/WordDTO";
 import Typography from "@mui/material/Typography";
+import MyModal from "../MyModal/MyModal";
 
 
 interface OptionsProps {
@@ -39,6 +40,11 @@ const Options = ({list, onClick}: OptionsProps) => {
 
 
 const Game = () => {
+        const [open, setOpen] = useState(false);
+        const handleOpen = () => setOpen(true);
+        const handleClose = () => setOpen(false);
+        const [modal, setModal] = useState('')
+
         const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
         const [voice, setVoice] = useState<SpeechSynthesisVoice | undefined>(undefined)
         const [newOne, setNewOne] = useState(0)
@@ -63,11 +69,9 @@ const Game = () => {
                 localStorage.setItem('game', JSON.stringify(res))
             }
 
-            if (isCorrect) {
-                alert('Верно!')
-            } else {
-                alert(`Неверно! Верно: ${options[0].rus}`)
-            }
+            const text = isCorrect ? 'Верно!' : `Неверно! Верно: ${options[0].rus}`
+            setModal(text)
+            handleOpen()
 
 
             setNewOne(prevState => prevState + 1)
@@ -97,24 +101,27 @@ const Game = () => {
         }
 
         return (
-            <div className='game'>
-                {/*<div>{voice?.name}</div>*/}
-                <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
-                {/*<Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>*/}
-                <Button
-                    sx={{width: '100%'}}
-                    endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
-                    onClick={() => {
-                        speechSynthesis.speak(message)
-                    }} size='large'>Speak</Button>
+            <>
+                <div className='game'>
+                    {/*<div>{voice?.name}</div>*/}
+                    <Typography align='center' variant="h2" gutterBottom>{options[0].eng}</Typography>
+                    {/*<Button onClick={() => speechSynthesis.speak(message)}>Hello world!</Button>*/}
+                    <Button
+                        sx={{width: '100%'}}
+                        endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
+                        onClick={() => {
+                            speechSynthesis.speak(message)
+                        }} size='large'>Speak</Button>
 
-                <Options list={options} onClick={selectAnswer}/>
+                    <Options list={options} onClick={selectAnswer}/>
 
-                <Button sx={{width: '100%'}} onClick={checkAnswer} variant='contained' color='warning'
-                        disabled={answer === 0} size='large'>
-                    Проверить
-                </Button>
-            </div>
+                    <Button sx={{width: '100%'}} onClick={checkAnswer} variant='contained' color='warning'
+                            disabled={answer === 0} size='large'>
+                        Проверить
+                    </Button>
+                </div>
+                <MyModal open={open} handleClose={handleClose} text={modal}/>
+            </>
         );
     }
 ;
