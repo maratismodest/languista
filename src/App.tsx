@@ -13,6 +13,7 @@ import {ROUTES} from "routes";
 import Add from "./components/Add/Add";
 import Translate from "./components/Translate/Translate";
 import {IWordDTO} from "./models/WordDTO";
+import MyBase from "./components/MyBase/MyBase";
 
 const res: () => IWordDTO[] = () => {
     const temp = localStorage.getItem('base')
@@ -42,6 +43,7 @@ function App() {
 
             <main>
                 <Routes>
+                    <Route path={ROUTES.myBase} element={<MyBase/>}/>
                     <Route path={ROUTES.main} element={<Game/>}/>
                     <Route path={ROUTES.profile} element={<Profile/>}/>
                     <Route path={ROUTES.translate}

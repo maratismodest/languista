@@ -2,5 +2,6 @@ export const ROUTES = {
     main: '/',
     profile: 'profile',
     add: 'add',
-    translate: 'translate'
+    translate: 'translate',
+    myBase: 'my-base'
 }

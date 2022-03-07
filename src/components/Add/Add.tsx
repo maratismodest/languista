@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Grid, Input} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import {getId} from "helpers/getId";
+
 
 const Add = () => {
     const [eng, setEng] = useState('')
@@ -15,7 +17,7 @@ const Add = () => {
         }
         const prev = JSON.parse(base);
         const res = [...prev, {
-            id: prev.length,
+            id: getId(),
             eng,
             rus
         }]
