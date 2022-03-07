@@ -9,7 +9,7 @@ interface AppProviderProps {
 
 export const AppProvider = ({children}: AppProviderProps) => {
 
-    const [state, setState] = useState(false)
+    const [state, setState] = useState(true)
 
     console.log(state)
     return <AppContext.Provider value={{state, setState}}>{children}</AppContext.Provider>
