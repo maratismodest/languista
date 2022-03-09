@@ -35,7 +35,15 @@ const AppHeader = () => {
                         component="div"
                         sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}}
                     >
-                        Languista
+                        Words
+                    </Typography></Link>
+                    <Link to={ROUTES.phrases}> <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}}
+                    >
+                        Phrases
                     </Typography></Link>
                     <Link to={ROUTES.profile}> <Typography
                         variant="h6"

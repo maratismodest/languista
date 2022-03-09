@@ -15,6 +15,7 @@ import Translate from "./components/Translate/Translate";
 import {IWordDTO} from "./models/WordDTO";
 import MyBase from "./components/MyBase/MyBase";
 import AppContext from "./context/AppContext";
+import Phrases from "./components/Phrases/Phrases";
 
 const res: () => IWordDTO[] = () => {
     const temp = localStorage.getItem('base')
@@ -50,6 +51,7 @@ function App() {
                 <Routes>
                     <Route path={ROUTES.myBase} element={<MyBase/>}/>
                     <Route path={ROUTES.main} element={<Game/>}/>
+                    <Route path={ROUTES.phrases} element={<Phrases/>}/>
                     <Route path={ROUTES.profile} element={<Profile/>}/>
                     <Route path={ROUTES.translate}
                            element={res().length > 4 ? <Translate words={res()}/> :

@@ -3,5 +3,6 @@ export const ROUTES = {
     profile: 'profile',
     add: 'add',
     translate: 'translate',
-    myBase: 'my-base'
+    myBase: 'my-base',
+    phrases: 'phrases'
 }

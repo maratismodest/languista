@@ -1,3 +1,5 @@
+import {IWordDTO} from "../models/WordDTO";
+
 export const database = [
     {id: 5, eng: 'I', rus: 'я'},
     {id: 6, eng: 'you', rus: 'ты, вы'},
@@ -151,3 +153,25 @@ export const game = {
     correct: 0,
     wrong: 0
 }
+
+export const phrases: IWordDTO[] = [
+    {id: 1, eng: 'Hello', rus: 'Здравствуйте!'},
+    {id: 2, eng: 'Hi', rus: 'Привет!'},
+    {id: 3, eng: 'Good morning', rus: 'Доброе утро!'},
+    {id: 4, eng: 'Good afternoon', rus: 'Добрый день!'},
+    {id: 5, eng: 'Good evening', rus: 'Добрый вечер!'},
+    {id: 6, eng: 'Goodbye', rus: 'До свидания!'},
+    {id: 7, eng: 'Bye', rus: 'Пока!'},
+    {id: 8, eng: 'Good night', rus: 'Спокойной ночи!'},
+    {id: 9, eng: 'See you', rus: 'До встречи!'},
+    {id: 10, eng: 'Have a nice day', rus: 'Хорошего дня!'},
+    {id: 11, eng: 'Please', rus: 'пожалуйста'},
+    {id: 12, eng: 'Thank you', rus: 'спасибо'},
+    {id: 13, eng: 'Thank you very much', rus: 'большое спасибо'},
+    {id: 14, eng: 'You\'re welcome', rus: 'пожалуйста, не за что'},
+    {id: 15, eng: 'Don\'t mention it', rus: 'не стоит благодарности'},
+    {id: 16, eng: 'I’m sorry', rus: 'извините'},
+    {id: 17, eng: 'No problem', rus: 'ничего страшного'},
+    {id: 18, eng: 'It\'s ok', rus: 'все в порядке'},
+    {id: 19, eng: 'Don\'t worry about it', rus: 'не стоит беспокойства'},
+]
