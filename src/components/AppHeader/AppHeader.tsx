@@ -17,11 +17,16 @@ const AppHeader = () => {
         setAnchorEl(event.currentTarget);
     };
     const handleEngRus = () => {
-        setState(true)
         setAnchorEl(null);
+        setState(true)
+
     };
     const handleRusEng = () => {
+        setAnchorEl(null);
         setState(false)
+
+    };
+    const handleClose = () => {
         setAnchorEl(null);
     };
 
@@ -67,7 +72,7 @@ const AppHeader = () => {
                         id="basic-menu"
                         anchorEl={anchorEl}
                         open={open}
-                        // onClose={handleClose}
+                        onClose={handleClose}
                         MenuListProps={{
                             'aria-labelledby': 'basic-button',
                         }}

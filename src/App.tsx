@@ -6,7 +6,7 @@ import AppHeader from "components/AppHeader/AppHeader";
 import Game from "components/Game/Game";
 import Profile from "components/Profile/Profile";
 
-import {game} from "./database/database";
+import {database, game, phrases} from "./database/database";
 
 import './App.css'
 import {ROUTES} from "routes";
@@ -15,7 +15,6 @@ import Translate from "./components/Translate/Translate";
 import {IWordDTO} from "./models/WordDTO";
 import MyBase from "./components/MyBase/MyBase";
 import AppContext from "./context/AppContext";
-import Phrases from "./components/Phrases/Phrases";
 
 const res: () => IWordDTO[] = () => {
     const temp = localStorage.getItem('base')
@@ -28,7 +27,7 @@ function App() {
 
     const context = useContext(AppContext)
 
-    console.log('context',context)
+    console.log('context', context)
 
     useEffect(() => {
         const storage = localStorage.getItem('game')
@@ -50,9 +49,11 @@ function App() {
             <main>
                 <Routes>
                     <Route path={ROUTES.myBase} element={<MyBase/>}/>
-                    <Route path={ROUTES.main} element={<Game/>}/>
-                    <Route path={ROUTES.phrases} element={<Phrases/>}/>
+                    <Route path={ROUTES.main} element={<Game words={database}/>}/>
+                    <Route path={ROUTES.phrases} element={<Game words={phrases}/>}/>
+
                     <Route path={ROUTES.profile} element={<Profile/>}/>
+
                     <Route path={ROUTES.translate}
                            element={res().length > 4 ? <Translate words={res()}/> :
                                <div>Мало слов или попробуйте перезапустить страницу!</div>}/>

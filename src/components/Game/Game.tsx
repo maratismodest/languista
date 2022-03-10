@@ -3,11 +3,10 @@ import Button from "@mui/material/Button";
 // @ts-ignore
 import _ from 'lodash'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import {database} from "database/database";
 import {IWordDTO} from "models/WordDTO";
 import Typography from "@mui/material/Typography";
 import MyModal from "../MyModal/MyModal";
-import AppContext from "../../context/AppContext";
+import AppContext from "context/AppContext";
 
 
 interface OptionsProps {
@@ -40,8 +39,11 @@ const Options = ({list, onClick, state}: OptionsProps) => {
     )
 }
 
+interface GameProps {
+    words: IWordDTO[]
+}
 
-const Game = () => {
+const Game = ({words}: GameProps) => {
         const [open, setOpen] = useState(false);
         const {state} = useContext(AppContext)
         const handleOpen = () => setOpen(true);
@@ -52,8 +54,8 @@ const Game = () => {
         const [voice, setVoice] = useState<SpeechSynthesisVoice | undefined>(undefined)
         const [newOne, setNewOne] = useState(0)
         const options: IWordDTO[] = useMemo(() => {
-            return _.shuffle(database).slice(0, 4)
-        }, [newOne])
+            return _.shuffle(words).slice(0, 4)
+        }, [newOne, words])
         const [answer, setAnswer] = useState<number>(0)
 
         const checkAnswer = (e: any) => {
@@ -107,7 +109,7 @@ const Game = () => {
         return (
             <>
                 <div className='game'>
-                    <Typography align='center' variant="h2"
+                    <Typography align='center' variant="h3"
                                 gutterBottom>{state ? options[0].eng : options[0].rus}</Typography>
                     <Button
                         sx={{width: '100%'}}
