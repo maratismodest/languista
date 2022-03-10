@@ -1,0 +1,11 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ru.languista.twa",
+      "sha256_cert_fingerprints":
+      ["34:A0:F0:0E:AF:84:07:DD:5F:85:02:03:60:E6:10:C3:BD:A5:79:C1:D8:AC:71:AE:A7:E6:E8:FD:FC:58:21:3B"]
+    }
+  }
+]
