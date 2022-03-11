@@ -8,13 +8,11 @@ import Typography from "@mui/material/Typography";
 import MyModal from "../MyModal/MyModal";
 import AppContext from "context/AppContext";
 
-
 interface OptionsProps {
     list: IWordDTO[],
     onClick: (id: number) => void,
     state: boolean
 }
-
 
 const Options = ({list, onClick, state}: OptionsProps) => {
     const shuffled: IWordDTO[] = useMemo(() => _.shuffle(list)
@@ -89,7 +87,6 @@ const Game = ({words}: GameProps) => {
 
         useEffect(() => {
             const voicesArr = window.speechSynthesis.getVoices()
-            console.log(voicesArr)
             if (voicesArr.length > 0) {
                 const res = state ? voicesArr.find(x => x.lang === 'en-US' || x.lang === 'en-GB') : voicesArr.find(x => x.lang === 'ru-RU')
                 setVoices(voicesArr)

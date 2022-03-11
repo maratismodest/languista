@@ -1,6 +1,6 @@
 import {IWordDTO} from "../models/WordDTO";
 
-export const database = [
+export const words = [
     {id: 5, eng: 'I', rus: 'я'},
     {id: 6, eng: 'you', rus: 'ты, вы'},
     {id: 7, eng: 'he', rus: 'он'},

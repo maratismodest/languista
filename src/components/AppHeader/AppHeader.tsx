@@ -7,7 +7,8 @@ import {Link} from "react-router-dom";
 import {ROUTES} from "routes";
 import Button from "@mui/material/Button";
 import {Menu, MenuItem} from "@mui/material";
-import AppContext from "../../context/AppContext";
+import LanguageIcon from '@mui/icons-material/Language';
+import AppContext from "context/AppContext";
 
 const AppHeader = () => {
     const {setState} = useContext(AppContext)
@@ -34,7 +35,10 @@ const AppHeader = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Link to={ROUTES.main}> <Typography
+                    <Link to={ROUTES.main}>
+                        <LanguageIcon  sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}} />
+                    </Link>
+                    <Link to={ROUTES.words}> <Typography
                         variant="h6"
                         noWrap
                         component="div"

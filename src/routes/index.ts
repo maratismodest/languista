@@ -1,8 +1,7 @@
 export const ROUTES = {
     main: '/',
+    words: 'words',
+    phrases: 'phrases',
     profile: 'profile',
-    add: 'add',
-    translate: 'translate',
-    myBase: 'my-base',
-    phrases: 'phrases'
+    add: 'add'
 }

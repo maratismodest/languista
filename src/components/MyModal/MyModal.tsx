@@ -28,7 +28,6 @@ interface MyModalProps {
 
 export default function MyModal({open, handleClose, text}: MyModalProps) {
 
-
     return (
         <Modal
             open={open}
