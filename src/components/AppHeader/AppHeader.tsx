@@ -33,68 +33,60 @@ const AppHeader = () => {
         setAnchorEl(null);
     };
 
-    const DesktopMenu = () => {
-        return (
-            <>
-                <Link to={ROUTES.main}>
-                    <LanguageIcon  sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}} />
-                </Link>
-                <Link to={ROUTES.words}> <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{mr: isMobile ? 1 : 2, display: {xs: 'flex', md: 'flex'}}}
-                >
-                    Words
-                </Typography></Link>
-                <Link to={ROUTES.phrases}> <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{mr: isMobile ? 1 : 2, display: {xs: 'flex', md: 'flex'}}}
-                >
-                    Phrases
-                </Typography></Link>
-                <Link to={ROUTES.profile}> <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{mr: isMobile ? 1 : 2, display: {xs: 'flex', md: 'flex'}}}
-                >
-                    Profile
-                </Typography></Link>
-                <Button
-                    id="basic-button"
-                    aria-controls={open ? 'basic-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
-                    onClick={handleClick}
-                    variant='contained'
-                >
-                    Change
-                </Button>
-                <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    MenuListProps={{
-                        'aria-labelledby': 'basic-button',
-                    }}
-                >
-                    <MenuItem onClick={handleEngRus}>Eng-Rus</MenuItem>
-                    <MenuItem onClick={handleRusEng}>Rus-Eng</MenuItem>
-                </Menu>
-            </>
-        )
-    }
-
 
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <DesktopMenu />
+                    <Link to={ROUTES.main}>
+                        <LanguageIcon  sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}} />
+                    </Link>
+                    <Link to={ROUTES.words}> <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{mr: isMobile ? 1 : 2, display: {xs: 'flex', md: 'flex'}}}
+                    >
+                        Words
+                    </Typography></Link>
+                    <Link to={ROUTES.phrases}> <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{mr: isMobile ? 1 : 2, display: {xs: 'flex', md: 'flex'}}}
+                    >
+                        Phrases
+                    </Typography></Link>
+                    <Link to={ROUTES.profile}> <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}}
+                    >
+                        Profile
+                    </Typography></Link>
+                    <Button
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                        variant='contained'
+                    >
+                        Change
+                    </Button>
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                            'aria-labelledby': 'basic-button',
+                        }}
+                    >
+                        <MenuItem onClick={handleEngRus}>Eng-Rus</MenuItem>
+                        <MenuItem onClick={handleRusEng}>Rus-Eng</MenuItem>
+                    </Menu>
                 </Toolbar>
             </Container>
         </AppBar>
