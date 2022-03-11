@@ -5,7 +5,6 @@ import {game} from "./database/database";
 import AppRoutes from "./components/AppRoutes/AppRoutes";
 import './App.css'
 
-
 function App() {
 
     useEffect(() => {
