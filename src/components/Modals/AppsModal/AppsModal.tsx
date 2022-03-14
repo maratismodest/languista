@@ -2,7 +2,8 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
+
 import Modal from '@mui/material/Modal';
 
 const style = {
@@ -23,21 +24,26 @@ const style = {
 
 export default function AppsModal() {
 
-    const [links, setLinks] = useState<any>()
+    const [state, setState] = useState<string>('true')
 
     useEffect(() => {
-        const res = localStorage.getItem('links')
-        if (res) {
-            setLinks(JSON.stringify(res))
-        }
+        setTimeout(() => {
+            const res = localStorage.getItem('links')
+            if (res) {
+                setState(JSON.stringify(res))
+            }
+            else {
+                setState('')
+            }
+        }, 180000)
 
     }, [])
     const handleClose = () => {
-        console.log("handleClose")
-        localStorage.setItem('links', 'true')
-        setLinks('true')
+        const date = new Date()
+        localStorage.setItem('links', date.toString())
+        setState( date.toString())
     }
-    if (links) {
+    if (state) {
         return null
     }
     return (
@@ -48,19 +54,21 @@ export default function AppsModal() {
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-                <a href="https://play.google.com/store/apps/details?id=ru.languista.twa">
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        скачать в Google Play
-                    </Typography>
-                </a>
-                <a href="https://apps.apple.com/us/app/languista/id1614141051">
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        скачать в Apple Store
-                    </Typography>
-                </a>
+                <Button variant='contained' sx={{mt: 2}}
+                        href={'https://play.google.com/store/apps/details?id=ru.languista.twa'}
+                        onClick={handleClose}
+                >
+                    скачать в Google Play
+                </Button>
+                <Button variant='contained' sx={{mt: 4}}
+                        href={'https://apps.apple.com/us/app/languista/id1614141051'}
+                        onClick={handleClose}
+                >
+                    скачать в Apple Store
+                </Button>
 
-                <Button variant='contained' sx={{mt: 2}} onClick={handleClose}>
-                    OK
+                <Button variant='contained' sx={{mt: 4}} onClick={handleClose}>
+                    остаться на сайте
                 </Button>
             </Box>
         </Modal>

@@ -3,8 +3,8 @@ import {YMInitializer} from 'react-yandex-metrika';
 import AppHeader from "components/AppHeader/AppHeader";
 import {game} from "./database/database";
 import AppRoutes from "./components/AppRoutes/AppRoutes";
-import './App.css'
 import AppsModal from "./components/Modals/AppsModal/AppsModal";
+import './App.css'
 
 function App() {
 
