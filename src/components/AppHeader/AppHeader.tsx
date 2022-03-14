@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import {Menu, MenuItem} from "@mui/material";
 import LanguageIcon from '@mui/icons-material/Language';
 import AppContext from "context/AppContext";
+import './AppHeader.css'
 
 const AppHeader = () => {
     const isMobile = useMemo(checkMobile, []);
@@ -38,10 +39,10 @@ const AppHeader = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Link to={ROUTES.main}>
+                    <Link to={ROUTES.main} className='nav'>
                         <LanguageIcon  sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}} />
                     </Link>
-                    <Link to={ROUTES.words}> <Typography
+                    <Link to={ROUTES.words} className='nav'> <Typography
                         variant="h6"
                         noWrap
                         component="div"
@@ -50,7 +51,7 @@ const AppHeader = () => {
                     >
                         Words
                     </Typography></Link>
-                    <Link to={ROUTES.phrases}> <Typography
+                    <Link to={ROUTES.phrases} className='nav'> <Typography
                         variant="h6"
                         noWrap
                         component="div"
@@ -59,7 +60,7 @@ const AppHeader = () => {
                     >
                         Phrases
                     </Typography></Link>
-                    <Link to={ROUTES.profile}> <Typography
+                    <Link to={ROUTES.profile} className='nav'> <Typography
                         variant="h6"
                         noWrap
                         component="div"

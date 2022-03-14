@@ -4,6 +4,7 @@ import AppHeader from "components/AppHeader/AppHeader";
 import {game} from "./database/database";
 import AppRoutes from "./components/AppRoutes/AppRoutes";
 import './App.css'
+import AppsModal from "./components/Modals/AppsModal/AppsModal";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             <main>
                 <AppRoutes/>
             </main>
+            <AppsModal/>
             <YMInitializer accounts={[87710163]} options={{webvisor: true}}/>
         </div>
     );

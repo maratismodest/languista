@@ -5,7 +5,7 @@ import _ from 'lodash'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {IWordDTO} from "models/WordDTO";
 import Typography from "@mui/material/Typography";
-import MyModal from "../MyModal/MyModal";
+import MyModal from "../Modals/MyModal/MyModal";
 import AppContext from "context/AppContext";
 
 interface OptionsProps {
