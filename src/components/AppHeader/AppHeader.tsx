@@ -45,6 +45,7 @@ const AppHeader = () => {
                         variant="h6"
                         noWrap
                         component="div"
+                        data-testid="words"
                         sx={{mr: isMobile ? 1 : 2, display: {xs: 'flex', md: 'flex'}}}
                     >
                         Words
@@ -53,6 +54,7 @@ const AppHeader = () => {
                         variant="h6"
                         noWrap
                         component="div"
+                        data-testid="phrases"
                         sx={{mr: isMobile ? 1 : 2, display: {xs: 'flex', md: 'flex'}}}
                     >
                         Phrases
@@ -61,6 +63,7 @@ const AppHeader = () => {
                         variant="h6"
                         noWrap
                         component="div"
+                        data-testid="profile"
                         sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}}
                     >
                         Profile
