@@ -35,7 +35,7 @@ export default function AppsModal() {
             else {
                 setState('')
             }
-        }, 180000)
+        }, 120000)
 
     }, [])
     const handleClose = () => {
