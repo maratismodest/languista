@@ -5,6 +5,7 @@ import {phrases, words} from "database/database";
 import Welcome from "components/Welcome/Welcome";
 import Game from "components/Game/Game";
 import Profile from "components/Profile/Profile";
+import Course from "components/Course/Course";
 
 
 interface RouteInterface {
@@ -28,6 +29,10 @@ const routes: RouteInterface[] = [
     {
         path: ROUTES.profile,
         component: <Profile/>
+    },
+    {
+        path: ROUTES.course,
+        component: <Course />
     }
 
 ]

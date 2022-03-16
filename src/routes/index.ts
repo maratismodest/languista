@@ -3,5 +3,6 @@ export const ROUTES = {
     words: 'words',
     phrases: 'phrases',
     profile: 'profile',
-    add: 'add'
+    add: 'add',
+    course: 'course'
 }

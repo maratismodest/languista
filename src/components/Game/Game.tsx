@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useContext, useMemo, useState} from 'react';
 import Button from "@mui/material/Button";
 // @ts-ignore
 import _ from 'lodash'
@@ -43,13 +43,11 @@ interface GameProps {
 
 const Game = ({words}: GameProps) => {
         const [open, setOpen] = useState(false);
-        const {state} = useContext(AppContext)
+        const {state, voice} = useContext(AppContext)
         const handleOpen = () => setOpen(true);
         const handleClose = () => setOpen(false);
         const [modal, setModal] = useState('')
 
-        const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
-        const [voice, setVoice] = useState<SpeechSynthesisVoice | undefined>(undefined)
         const [newOne, setNewOne] = useState(0)
         const options: IWordDTO[] = useMemo(() => {
             return _.shuffle(words).slice(0, 4)
@@ -85,23 +83,12 @@ const Game = ({words}: GameProps) => {
             setAnswer(id)
         }, [answer])
 
-        useEffect(() => {
-            const voicesArr = window.speechSynthesis.getVoices()
-            if (voicesArr.length > 0) {
-                const res = state ? voicesArr.find(x => x.lang === 'en-US' || x.lang === 'en-GB') : voicesArr.find(x => x.lang === 'ru-RU')
-                setVoices(voicesArr)
-                setVoice(res)
-            }
-
-        }, [window.speechSynthesis, voice, state])
-
 
         let message = new SpeechSynthesisUtterance();
         message.lang = state ? 'en-US' : 'ru-RU';
         message.text = state ? options[0].eng : options[0].rus;
-        if (voice) {
-            message.voice = voice
-        }
+        message.voice = voice
+
 
         return (
             <>
