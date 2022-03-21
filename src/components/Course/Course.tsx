@@ -1,17 +1,17 @@
-import React, {FunctionComponent, useContext, useState} from 'react';
+import React from 'react';
 import {Link} from "react-router-dom";
-import AppContext from "context/AppContext";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import Button from "@mui/material/Button";
-import './Course.scss'
-import {COURSE, ROUTES} from "routes";
+import {COURSE} from "routes";
+import classes from './Course.module.scss'
+import Typography from "@mui/material/Typography";
 
 const Course = () => {
-
-
     return (
-        <div className='course'>
-            <Link to={COURSE.syllables}>Syllables</Link>
+        <div className={classes.course}>
+            <Link to={COURSE.syllables}>
+                <Typography align='center' variant="h3" gutterBottom>
+                    Слоги
+                </Typography>
+            </Link>
         </div>
     );
 };

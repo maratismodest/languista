@@ -2,7 +2,8 @@ import React, {FunctionComponent, useContext, useState} from 'react';
 import AppContext from "context/AppContext";
 import Button from "@mui/material/Button";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import './Syllables.scss'
+import classes from '../../Course.module.scss'
+import Typography from "@mui/material/Typography";
 
 interface TagInterface {
     tag: string,
@@ -14,7 +15,7 @@ const PlayButton: FunctionComponent<{ text: string }> = ({text}) => {
 
     return (
         <Button
-            className='courseButton'
+            className={classes.courseButton}
             endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
             onClick={() => {
                 message.text = text
@@ -28,22 +29,28 @@ const getHtml = (arr: TagInterface[]) =>
         switch (tag) {
             case 'h2': {
                 return (
-                    <h2 key={text}>
+                    <Typography variant="h4" className={classes.courseBlock} key={text}>
                         {text}
-                    </h2>
+                    </Typography>
                 )
             }
             case 'p': {
                 return (
-                    <p key={text}>
+                    <Typography
+                        variant="h5"
+                        gutterBottom
+                        key={text}
+                        className={classes.courseBlock}
+                    >
                         {text}
-                    </p>
+                    </Typography>
+
                 )
             }
             case 'li': {
                 return (
-                    <div className={'some'} key={text}>
-                        {text}
+                    <div className={classes.courseBlock} key={text}>
+                        <Typography align='center' variant="h5" gutterBottom>{text}</Typography>
                         <PlayButton text={text}/>
                     </div>
                 )
@@ -118,25 +125,107 @@ const ph: TagInterface[] = [
     {
         tag: 'li',
         text: 'elephant'
+    },
+    {
+        tag: 'li',
+        text: 'photo'
+    }
+
+]
+
+const sh: TagInterface[] = [
+    {
+        tag: 'h2',
+        text: 'Буквосочетание sh'
+    },
+    {
+        tag: 'p',
+        text: 'Буквосочетание sh в английском языке передает звук [?]. Этот звук похож на русскую букву Ш.'
+    },
+    {
+        tag: 'li',
+        text: 'She'
+    },
+    {
+        tag: 'li',
+        text: 'Shop'
+    }
+
+]
+
+const ch: TagInterface[] = [
+    {
+        tag: 'h2',
+        text: 'Буквосочетания ch и tch '
+    },
+    {
+        tag: 'p',
+        text: 'Буквосочетания ch и tch в английском языке передают звук [t?]. Этот звук похож на русское буквосочетания тч, но в английском это надо произнести одним звуком'
+    },
+    {
+        tag: 'li',
+        text: 'lunch'
+    },
+    {
+        tag: 'li',
+        text: 'teacher'
+    },
+    {
+        tag: 'li',
+        text: 'chicken'
+    }
+
+]
+
+const ck: TagInterface[] = [
+    {
+        tag: 'h2',
+        text: 'Английское буквосочетание ck'
+    },
+    {
+        tag: 'p',
+        text: 'Английское буквосочетание ck передает звук [k]. Данный звук похож на русскую К.'
+    },
+    {
+        tag: 'li',
+        text: 'Black'
+    },
+    {
+        tag: 'li',
+        text: 'Chicken'
+    },
+    {
+        tag: 'li',
+        text: 'Ticket'
     }
 
 ]
 
 const Syllables = () => {
-    const max = 2
+    const max = 5
     const [next, setNext] = useState(0)
 
     return (
-        <div className='course'>
+        <div className={classes.course}>
             {next === 0 && getHtml(ea)}
             {next === 1 && getHtml(oo)}
             {next === 2 && getHtml(ph)}
+            {next === 3 && getHtml(sh)}
+            {next === 4 && getHtml(ch)}
+            {next === 5 && getHtml(ck)}
 
-            <Button
-                endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
-                onClick={() => {
-                    setNext(prevState => prevState + 1 === max ? 0 : prevState + 1)
-                }} size='large'>Дальше</Button>
+            <div className={classes.courseNext}>
+                <Button
+                    endIcon={<PlayCircleOutlineIcon/>}
+                    variant='contained'
+                    color='success'
+                    onClick={() => {
+                        setNext(prevState => prevState + 1 === max ? 0 : prevState + 1)
+                    }}
+                    size='large'
+                >Дальше</Button>
+            </div>
+
         </div>
 
     );
