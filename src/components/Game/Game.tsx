@@ -43,7 +43,7 @@ interface GameProps {
 
 const Game = ({words}: GameProps) => {
         const [open, setOpen] = useState(false);
-        const {state, voice} = useContext(AppContext)
+        const {state, voice, message} = useContext(AppContext)
         const handleOpen = () => setOpen(true);
         const handleClose = () => setOpen(false);
         const [modal, setModal] = useState('')
@@ -61,12 +61,7 @@ const Game = ({words}: GameProps) => {
             if (storage) {
                 const res = JSON.parse(storage)
                 const {correct, wrong} = res
-                if (isCorrect) {
-                    res.correct = correct + 1
-                } else {
-                    res.wrong = wrong + 1
-                }
-
+                isCorrect ? res.correct = correct + 1 : res.wrong = wrong + 1
                 localStorage.setItem('game', JSON.stringify(res))
             }
 
@@ -84,10 +79,7 @@ const Game = ({words}: GameProps) => {
         }, [answer])
 
 
-        let message = new SpeechSynthesisUtterance();
-        message.lang = state ? 'en-US' : 'ru-RU';
         message.text = state ? options[0].eng : options[0].rus;
-        message.voice = voice
 
 
         return (
