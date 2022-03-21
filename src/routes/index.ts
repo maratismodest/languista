@@ -6,3 +6,7 @@ export const ROUTES = {
     add: 'add',
     course: 'course'
 }
+
+export const COURSE = {
+    syllables: 'syllables'
+}

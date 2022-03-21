@@ -12,6 +12,12 @@ export const AppProvider = ({children}: AppProviderProps) => {
     const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
     const [voice, setVoice] = useState<SpeechSynthesisVoice | undefined>(undefined)
 
+    const message: SpeechSynthesisUtterance = new SpeechSynthesisUtterance();
+    message.lang = 'en-US';
+    if (voice) {
+        message.voice = voice
+    }
+
     useEffect(() => {
         const voicesArr = window.speechSynthesis.getVoices()
         if (voicesArr.length > 0) {
@@ -22,5 +28,6 @@ export const AppProvider = ({children}: AppProviderProps) => {
 
     }, [window.speechSynthesis, state])
 
-    return <AppContext.Provider value={{state, setState, voices, setVoices, voice, setVoice}}>{children}</AppContext.Provider>
+    return <AppContext.Provider
+        value={{state, setState, voices, setVoices, voice, setVoice, message}}>{children}</AppContext.Provider>
 }
