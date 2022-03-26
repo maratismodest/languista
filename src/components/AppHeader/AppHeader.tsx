@@ -21,6 +21,11 @@ const AppHeader = () => {
         setAnchorEl(event.currentTarget);
     };
 
+    const handleMain = () => {
+        setAnchorEl(null);
+        navigate(ROUTES.main)
+    }
+
     const handleWords = () => {
         setAnchorEl(null);
         navigate(ROUTES.words)
@@ -52,6 +57,7 @@ const AppHeader = () => {
                         color="inherit"
                         aria-label="open drawer"
                         sx={{ mr: 'auto' }}
+                        onClick={handleMain}
                     >
                         <LanguageIcon/>
                     </IconButton>
@@ -74,6 +80,7 @@ const AppHeader = () => {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
+                        <MenuItem onClick={handleMain}>Main</MenuItem>
                         <MenuItem onClick={handleWords}>Words</MenuItem>
                         <MenuItem onClick={handlePhrases}>Phrases</MenuItem>
                         <MenuItem onClick={handleDictaphone}>Dictaphone</MenuItem>
