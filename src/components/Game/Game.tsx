@@ -11,10 +11,11 @@ import AppContext from "context/AppContext";
 interface OptionsProps {
     list: IWordDTO[],
     onClick: (id: number) => void,
+    onDoubleClick: () => void
     state: boolean
 }
 
-const Options = ({list, onClick, state}: OptionsProps) => {
+const Options = ({list, onClick, state, onDoubleClick}: OptionsProps) => {
     const shuffled: IWordDTO[] = useMemo(() => _.shuffle(list)
         , [list])
     const res = shuffled.map((option, index) => {
@@ -22,6 +23,10 @@ const Options = ({list, onClick, state}: OptionsProps) => {
             <li key={option.id}>
                 <Button sx={{width: '100%'}} variant='contained'
                         onClick={() => onClick(option.id)}
+                        onDoubleClick={() => {
+                            onClick(option.id)
+                            onDoubleClick()
+                        }}
                         size='large'
                 >
                     {state ? option.rus : option.eng}
@@ -54,8 +59,7 @@ const Game = ({words}: GameProps) => {
         }, [newOne, words])
         const [answer, setAnswer] = useState<number>(0)
 
-        const checkAnswer = (e: any) => {
-            e.preventDefault()
+        const checkAnswer = () => {
             const isCorrect = answer === options[0].id
             const storage = localStorage.getItem('game')
             if (storage) {
@@ -89,15 +93,16 @@ const Game = ({words}: GameProps) => {
                                 gutterBottom>{state ? options[0].eng : options[0].rus}</Typography>
                     <Button
                         sx={{width: '100%'}}
-                        endIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
+                        startIcon={<PlayCircleOutlineIcon/>} variant='contained' color='success'
                         onClick={() => {
                             speechSynthesis.speak(message)
-                        }} size='large'>Speak</Button>
+                        }} size='large'>PLAY</Button>
 
-                    <Options list={options} onClick={selectAnswer} state={state}/>
+                    <Options list={options} onClick={selectAnswer} state={state} onDoubleClick={checkAnswer}/>
 
                     <Button sx={{width: '100%'}} onClick={checkAnswer} variant='contained' color='warning'
-                            disabled={answer === 0} size='large'>
+                            disabled={answer === 0} size='large'
+                    >
                         Проверить
                     </Button>
                 </div>
