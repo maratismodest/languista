@@ -1,4 +1,4 @@
-import React, {useContext, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import checkMobile from "helpers/checkMobile";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,34 +9,35 @@ import {ROUTES} from "routes";
 import Button from "@mui/material/Button";
 import {Menu, MenuItem} from "@mui/material";
 import LanguageIcon from '@mui/icons-material/Language';
-import AppContext from "context/AppContext";
 import './AppHeader.css'
+import IconButton from "@mui/material/IconButton";
 
 const AppHeader = () => {
     let navigate = useNavigate()
     const isMobile = useMemo(checkMobile, []);
-    const {setState} = useContext(AppContext)
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleEngRus = () => {
-        setAnchorEl(null);
-        setState(true)
 
-    };
-    const handleRusEng = () => {
+    const handleMain = () => {
         setAnchorEl(null);
-        setState(false)
-
-    };
-
-    const handleCourse = () => {
-        setAnchorEl(null);
-        navigate(ROUTES.course)
+        navigate(ROUTES.main)
     }
 
+    const handleWords = () => {
+        setAnchorEl(null);
+        navigate(ROUTES.words)
+    }
+    const handlePhrases = () => {
+        setAnchorEl(null);
+        navigate(ROUTES.phrases)
+    }
+    const handleProfile = () => {
+        setAnchorEl(null);
+        navigate(ROUTES.profile)
+    }
     const handleDictaphone = () => {
         setAnchorEl(null);
         navigate(ROUTES.dictaphone)
@@ -50,36 +51,16 @@ const AppHeader = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Link to={ROUTES.main} className='nav'>
-                        <LanguageIcon sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}}/>
-                    </Link>
-                    <Link to={ROUTES.words} className='nav'> <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        data-testid="words"
-                        sx={{mr: isMobile ? 1 : 2, display: {xs: 'flex', md: 'flex'}}}
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        sx={{ mr: 'auto' }}
+                        onClick={handleMain}
                     >
-                        Words
-                    </Typography></Link>
-                    <Link to={ROUTES.phrases} className='nav'> <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        data-testid="phrases"
-                        sx={{mr: isMobile ? 1 : 2, display: {xs: 'flex', md: 'flex'}}}
-                    >
-                        Phrases
-                    </Typography></Link>
-                    <Link to={ROUTES.profile} className='nav'> <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        data-testid="profile"
-                        sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}}
-                    >
-                        Profile
-                    </Typography></Link>
+                        <LanguageIcon/>
+                    </IconButton>
                     <Button
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
@@ -88,7 +69,7 @@ const AppHeader = () => {
                         onClick={handleClick}
                         variant='contained'
                     >
-                        Change
+                        Menu
                     </Button>
                     <Menu
                         id="basic-menu"
@@ -99,10 +80,11 @@ const AppHeader = () => {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={handleEngRus}>Eng-Rus</MenuItem>
-                        <MenuItem onClick={handleRusEng}>Rus-Eng</MenuItem>
-                        <MenuItem onClick={handleCourse}>Course</MenuItem>
+                        <MenuItem onClick={handleMain}>Main</MenuItem>
+                        <MenuItem onClick={handleWords}>Words</MenuItem>
+                        <MenuItem onClick={handlePhrases}>Phrases</MenuItem>
                         <MenuItem onClick={handleDictaphone}>Dictaphone</MenuItem>
+                        <MenuItem onClick={handleProfile}>Profile</MenuItem>
                     </Menu>
                 </Toolbar>
             </Container>

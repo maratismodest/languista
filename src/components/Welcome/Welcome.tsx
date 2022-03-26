@@ -22,6 +22,11 @@ const Welcome = () => {
                     Phrases
                 </Button>
             </Link>
+            <Link to={ROUTES.dictaphone}>
+                <Button variant='contained' color='warning' size='large' sx={{mt: 2}}>
+                    Dictaphone
+                </Button>
+            </Link>
         </>
     );
 };
