@@ -50,7 +50,11 @@ const Game = ({words}: GameProps) => {
         const [open, setOpen] = useState(false);
         const {state, voice, message} = useContext(AppContext)
         const handleOpen = () => setOpen(true);
-        const handleClose = () => setOpen(false);
+        const handleClose = () => {
+            setOpen(false);
+            setNewOne(prevState => prevState + 1)
+            setAnswer(0)
+        }
         const [modal, setModal] = useState('')
 
         const [newOne, setNewOne] = useState(0)
@@ -74,8 +78,7 @@ const Game = ({words}: GameProps) => {
             handleOpen()
 
 
-            setNewOne(prevState => prevState + 1)
-            setAnswer(0)
+
         }
 
         const selectAnswer = useCallback((id: number) => {
