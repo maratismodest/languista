@@ -36,6 +36,11 @@ const AppHeader = () => {
         setAnchorEl(null);
         navigate(ROUTES.course)
     }
+
+    const handleDictaphone = () => {
+        setAnchorEl(null);
+        navigate(ROUTES.dictaphone)
+    }
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -46,7 +51,7 @@ const AppHeader = () => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Link to={ROUTES.main} className='nav'>
-                        <LanguageIcon  sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}} />
+                        <LanguageIcon sx={{mr: 2, display: {xs: 'flex', md: 'flex'}}}/>
                     </Link>
                     <Link to={ROUTES.words} className='nav'> <Typography
                         variant="h6"
@@ -97,6 +102,7 @@ const AppHeader = () => {
                         <MenuItem onClick={handleEngRus}>Eng-Rus</MenuItem>
                         <MenuItem onClick={handleRusEng}>Rus-Eng</MenuItem>
                         <MenuItem onClick={handleCourse}>Course</MenuItem>
+                        <MenuItem onClick={handleDictaphone}>Dictaphone</MenuItem>
                     </Menu>
                 </Toolbar>
             </Container>

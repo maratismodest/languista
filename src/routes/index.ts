@@ -4,7 +4,8 @@ export const ROUTES = {
     phrases: 'phrases',
     profile: 'profile',
     add: 'add',
-    course: 'course'
+    course: 'course',
+    dictaphone: 'dictaphone'
 }
 
 export const COURSE = {

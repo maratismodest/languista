@@ -7,6 +7,7 @@ import Game from "components/Game/Game";
 import Profile from "components/Profile/Profile";
 import Course from "components/Course/Course";
 import Syllables from "../Course/components/Syllables/Syllables";
+import Dictaphone from "../Dictaphone/Dictaphone";
 
 
 interface RouteInterface {
@@ -38,6 +39,10 @@ const routes: RouteInterface[] = [
     {
         path: ROUTES.course + '/' + COURSE.syllables,
         component: <Syllables />
+    },
+    {
+        path: ROUTES.dictaphone,
+        component: <Dictaphone />
     }
 
 ]
