@@ -14,8 +14,8 @@ import {ROUTES} from "../../routes";
 export default function AppHeader() {
     let navigate = useNavigate()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -64,29 +64,23 @@ export default function AppHeader() {
 
 
                     <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
                         aria-haspopup="true"
-                        onClick={handleMenu}
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
                         color="inherit"
                     >
                         <MenuIcon/>
                     </IconButton>
                     <Menu
-                        id="menu-appbar"
+                        id="basic-menu"
                         anchorEl={anchorEl}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        open={Boolean(anchorEl)}
+                        open={open}
                         onClose={handleClose}
+                        MenuListProps={{
+                            'aria-labelledby': 'basic-button',
+                        }}
                     >
                         <MenuItem onClick={handleProfile}>Profile</MenuItem>
                         <MenuItem onClick={handleWords}>Words</MenuItem>
