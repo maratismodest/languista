@@ -1,95 +1,99 @@
-import React, {useMemo, useState} from 'react';
-import checkMobile from "helpers/checkMobile";
+import * as React from 'react';
+import {useNavigate} from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import {Link, useNavigate} from "react-router-dom";
-import {ROUTES} from "routes";
-import Button from "@mui/material/Button";
-import {Menu, MenuItem} from "@mui/material";
 import LanguageIcon from '@mui/icons-material/Language';
-import './AppHeader.css'
-import IconButton from "@mui/material/IconButton";
+import MenuIcon from '@mui/icons-material/Menu';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import {ROUTES} from "../../routes";
 
-const AppHeader = () => {
+
+export default function AppHeader() {
     let navigate = useNavigate()
-    const isMobile = useMemo(checkMobile, []);
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleMain = () => {
-        setAnchorEl(null);
-        navigate(ROUTES.main)
-    }
-
-    const handleWords = () => {
-        setAnchorEl(null);
-        navigate(ROUTES.words)
-    }
-    const handlePhrases = () => {
-        setAnchorEl(null);
-        navigate(ROUTES.phrases)
-    }
-    const handleProfile = () => {
-        setAnchorEl(null);
-        navigate(ROUTES.profile)
-    }
-    const handleDictaphone = () => {
-        setAnchorEl(null);
-        navigate(ROUTES.dictaphone)
-    }
     const handleClose = () => {
         setAnchorEl(null);
     };
 
+    const handleMain = () => {
+        navigate(ROUTES.main)
+        handleClose()
+    }
+
+    const handleProfile = () => {
+        navigate(ROUTES.profile)
+        handleClose()
+    }
+
+    const handleWords = () => {
+        navigate(ROUTES.words)
+        handleClose()
+    }
+
+    const handlePhrases = () => {
+        navigate(ROUTES.phrases)
+        handleClose()
+    }
+
+    const handleDictaphone = () => {
+        navigate(ROUTES.dictaphone)
+        handleClose()
+    }
 
     return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
+            <AppBar position="static">
+                <Toolbar>
                     <IconButton
                         size="large"
                         edge="start"
                         color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 'auto' }}
+                        aria-label="menu"
+                        sx={{mr: 'auto'}}
                         onClick={handleMain}
                     >
                         <LanguageIcon/>
                     </IconButton>
-                    <Button
-                        id="basic-button"
-                        aria-controls={open ? 'basic-menu' : undefined}
+
+
+                    <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
                         aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                        onClick={handleClick}
-                        variant='contained'
+                        onClick={handleMenu}
+                        color="inherit"
                     >
-                        Menu
-                    </Button>
+                        <MenuIcon/>
+                    </IconButton>
                     <Menu
-                        id="basic-menu"
+                        id="menu-appbar"
                         anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        MenuListProps={{
-                            'aria-labelledby': 'basic-button',
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
                         }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
                     >
-                        <MenuItem onClick={handleMain}>Main</MenuItem>
+                        <MenuItem onClick={handleProfile}>Profile</MenuItem>
                         <MenuItem onClick={handleWords}>Words</MenuItem>
                         <MenuItem onClick={handlePhrases}>Phrases</MenuItem>
                         <MenuItem onClick={handleDictaphone}>Dictaphone</MenuItem>
-                        <MenuItem onClick={handleProfile}>Profile</MenuItem>
                     </Menu>
                 </Toolbar>
-            </Container>
-        </AppBar>
-    )
-};
-
-export default AppHeader
+            </AppBar>
+    );
+}

@@ -33,7 +33,6 @@ const Profile = () => {
             <Typography variant="h5">
                 <a href='https://t.me/languista' style={{color: 'blue'}}>https://t.me/languista</a>
             </Typography>
-            <MyBase/>
         </div>
     );
 };
