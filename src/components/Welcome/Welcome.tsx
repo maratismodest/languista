@@ -11,7 +11,7 @@ const Welcome = () => {
             <img src={Logo} alt="logo" width={128}/>
             <Typography align='center' variant="h2" gutterBottom>Languista</Typography>
             <Typography align='center' variant="body1" gutterBottom>Приложение для изучения английского : 200 основных
-                слов и фраз в формате игры с озвучкой.</Typography>
+                слов и фраз в формате игры с озвучкой. Есть тренажер вашего произношения</Typography>
             <Link to={ROUTES.words}>
                 <Button variant='contained' color='warning' size='large' sx={{mt: 2}}>
                     Words
