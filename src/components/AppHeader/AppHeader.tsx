@@ -39,6 +39,12 @@ export default function AppHeader() {
         handleClose()
     }
 
+    const handleWordsAdvanced = () => {
+        navigate(ROUTES.wordsAdvanced)
+        handleClose()
+    }
+
+
     const handlePhrases = () => {
         navigate(ROUTES.phrases)
         handleClose()
@@ -84,7 +90,8 @@ export default function AppHeader() {
                     }}
                 >
                     <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                    <MenuItem onClick={handleWords}>Words</MenuItem>
+                    <MenuItem onClick={handleWords}>Words(150)</MenuItem>
+                    <MenuItem onClick={handleWordsAdvanced}>Words(500)</MenuItem>
                     <MenuItem onClick={handlePhrases}>Phrases</MenuItem>
                     {browserName !== 'Safari' && <MenuItem onClick={handleDictaphone}>Dictaphone</MenuItem>}
                 </Menu>
