@@ -1,6 +1,7 @@
 export const ROUTES = {
     main: '/',
     words: 'words',
+    wordsAdvanced: 'words-advanced',
     phrases: 'phrases',
     profile: 'profile',
     add: 'add',
