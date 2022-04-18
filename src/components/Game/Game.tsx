@@ -1,12 +1,16 @@
-import React, {useCallback, useContext, useMemo, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import Button from "@mui/material/Button";
-// @ts-ignore
 import _ from 'lodash'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import {IWordDTO} from "models/WordDTO";
 import Typography from "@mui/material/Typography";
 import MyModal from "../Modals/MyModal/MyModal";
 import AppContext from "context/AppContext";
+import {useQuery} from "@apollo/client";
+import {GET_ALL_WORDS} from "../../graphql/query/words";
+import {GET_ALL_PHRASES} from "../../graphql/query/phrases";
+import {GET_ALL_ADVANCED} from "../../graphql/query/advanced";
+import {TypeGame} from "../AppRoutes/AppRoutes";
 
 interface OptionsProps {
     list: IWordDTO[],
@@ -42,11 +46,18 @@ const Options = ({list, onClick, state, onDoubleClick}: OptionsProps) => {
     )
 }
 
+
+interface GuessProps {
+    words: TypeGame
+}
+
+
 interface GameProps {
     words: IWordDTO[]
 }
 
-const Game = ({words}: GameProps) => {
+
+const Guess = ({words}: GameProps) => {
         const [open, setOpen] = useState(false);
         const {state, voice, message} = useContext(AppContext)
         const handleOpen = () => setOpen(true);
@@ -76,7 +87,6 @@ const Game = ({words}: GameProps) => {
             const text = isCorrect ? 'Верно!' : `Неверно! Верно: ${options[0].rus}`
             setModal(text)
             handleOpen()
-
 
 
         }
@@ -114,5 +124,63 @@ const Game = ({words}: GameProps) => {
         );
     }
 ;
+
+const getUseQuery = (type: TypeGame) => {
+    switch (type) {
+        case 'words':
+            return {
+                query: GET_ALL_WORDS,
+                key: 'getAllWords'
+            }
+        case 'phrases':
+            return {
+                query: GET_ALL_PHRASES,
+                key: 'getAllPhrases'
+            }
+        case 'advanced':
+            return {
+                query: GET_ALL_ADVANCED,
+                key: 'getAllAdvanced'
+            }
+        default:
+            return {
+                query: GET_ALL_WORDS,
+                key: 'getAllWords'
+            }
+    }
+}
+
+const Game = ({words}: GuessProps) => {
+    const res = getUseQuery(words)
+    const {data, loading, error, refetch} = useQuery(res.query)
+
+    useEffect(() => {
+        refetch()
+    }, [words])
+
+    if (loading || !data[res.key]) {
+        return (
+            <>
+                <div className='game'>
+                    ...Loading
+                </div>
+            </>
+        )
+    }
+    if (error) {
+        return (
+            <>
+                <div className='game'>
+                    {error}
+                </div>
+            </>
+        )
+    }
+
+    return (
+        <Guess words={data[res.key]}/>
+    )
+};
+
 
 export default Game;

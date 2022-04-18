@@ -16,6 +16,9 @@ interface RouteInterface {
     component: ReactNode
 }
 
+export type TypeGame = 'words' | 'phrases' | 'advanced'
+
+
 const routes: RouteInterface[] = [
     {
         path: ROUTES.main,
@@ -23,15 +26,15 @@ const routes: RouteInterface[] = [
     },
     {
         path: ROUTES.words,
-        component: <Game words={words}/>
+        component: <Game words='words'/>
     },
     {
         path: ROUTES.wordsAdvanced,
-        component: <Game words={advanced}/>
+        component: <Game words='advanced'/>
     },
     {
         path: ROUTES.phrases,
-        component: <Game words={phrases}/>
+        component: <Game words='phrases'/>
     },
     {
         path: ROUTES.profile,

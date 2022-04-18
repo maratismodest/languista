@@ -6,7 +6,7 @@ import AppRoutes from "./components/AppRoutes/AppRoutes";
 import AppsModal from "./components/Modals/AppsModal/AppsModal";
 import './App.css'
 
-function App() {
+function Examples() {
 
     useEffect(() => {
         const storage = localStorage.getItem('game')
@@ -27,4 +27,4 @@ function App() {
     );
 }
 
-export default App;
+export default Examples;

@@ -1,18 +1,13 @@
-import { useQuery } from '@apollo/client';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Logo from 'assets/logo.png';
-import { GET_ALL_WORDS } from 'graphql/query/words';
 import useDetectBrowser from 'helpers/useDetectBrowser';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ROUTES } from 'routes';
+import {Link} from 'react-router-dom';
+import {ROUTES} from 'routes';
 
 const Welcome = () => {
-    const {data, loading, error, refetch} = useQuery(GET_ALL_WORDS)
     const browserName = useDetectBrowser();
-
-    console.log(data)
 
     return (
         <>

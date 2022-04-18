@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import './App.css'
+import './Examples.css'
 import {useMutation, useQuery} from "@apollo/client";
 import {GET_ALL_USERS, GET_ONE_USER} from "./query/user";
 import {CREATE_USER} from "./mutations/user";
 
-const App = () => {
+const Examples = () => {
     const {data, loading, error, refetch} = useQuery(GET_ALL_USERS)
     const {data:oneUser, loading: loadingOneUser} = useQuery(GET_ONE_USER, {
         variables: {
@@ -66,4 +66,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Examples;
