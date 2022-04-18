@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.3.6",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.4.4",
@@ -25,7 +26,8 @@
     "react-yandex-metrika": "^2.6.0",
     "sass": "^1.49.9",
     "typescript": "^4.6.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "graphql": "^15.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
